@@ -36,6 +36,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
         //
         grantedAuthorities.add(new SimpleGrantedAuthority(role));
-        return new JwtUserDetails(username, user.getPassword(), grantedAuthorities);
+        return new JwtUserDetails(user,username, user.getPassword(), grantedAuthorities);
     }
 }
