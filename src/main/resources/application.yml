@@ -1,0 +1,20 @@
+server:
+  port: 18099
+
+spring:
+  application:
+    name: security
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #测试数据库
+    username: root
+    password: 123456
+    url: 'jdbc:mysql://192.168.1.80:3306/ckcow?useUnicode=true&characterEncoding=UTF-8'
+  servlet:
+    multipart:
+      max-file-size: 80MB
+      max-request-size: 80MB
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
