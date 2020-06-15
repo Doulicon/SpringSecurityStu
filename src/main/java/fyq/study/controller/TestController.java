@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -62,12 +63,12 @@ public class TestController {
     @PreAuthorize(AuthorityConstant.ALL_USER)
     @GetMapping(value="/allUserTest")
     public RespEntity ALLTest() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         //获取对象，方法一：自定义验证类，实现UserDetailsService接口
         //自定义用户信息对象对象JwtUserDetails，实现UserDetails接口，添加需要添加的用户信息
         //UserDetailsServiceImpl 中的loadUserByUsername方法返回自定义的对象
         //对象通过authentication.getPrincipal()获得
-        System.out.println(authentication.getPrincipal().toString());
+        JwtUserDetails user = (JwtUserDetails) userDetailsService.loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        System.out.println(user);
         return new RespEntity(RespCode.OK,"ALLTest测试成功");
     }
 
